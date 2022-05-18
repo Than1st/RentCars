@@ -25,7 +25,7 @@ class MainAdapter(private val onItemClick: OnClickListener): RecyclerView.Adapte
         }
     }
     private val differ = AsyncListDiffer(this, diffCallBack)
-    fun submitData(value: List<GetAllCarResponseItem>?) = differ.submitList(value)
+    fun submitData(value: List<GetAllCarResponseItem>) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

@@ -2,12 +2,11 @@ package com.than.rentcars
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.fragment.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.than.rentcars.adapter.MainAdapter
@@ -17,7 +16,6 @@ import com.than.rentcars.service.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -60,7 +58,9 @@ class MainActivity : AppCompatActivity() {
                     val body = response.body()
                     val code = response.code()
                     if (code == 200) {
-                        showList(body)
+                        if (body != null) {
+                            showList(body)
+                        }
                         binding.pbMain.visibility = View.GONE
                     } else {
                         binding.pbMain.visibility = View.GONE
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
             })
     }
-    private fun showList(data: List<GetAllCarResponseItem>?) {
+    private fun showList(data: List<GetAllCarResponseItem>) {
         val adapter = MainAdapter(object : MainAdapter.OnClickListener {
             override fun onClickItem(data: GetAllCarResponseItem) {
                 Toast.makeText(this@MainActivity, "${data.name} dipilih", Toast.LENGTH_SHORT).show()
